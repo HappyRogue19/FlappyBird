@@ -181,6 +181,9 @@ public class GameRenderer {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         AssetLoader.click.play();
+                        AssetLoader.menu_music.setLooping(true);
+                        AssetLoader.menu_music.setVolume(AssetLoader.volume_music);
+                        AssetLoader.menu_music.play();
                         ((Game) Gdx.app.getApplicationListener()).setScreen(new ParametersScreen());
                     }
                 });
