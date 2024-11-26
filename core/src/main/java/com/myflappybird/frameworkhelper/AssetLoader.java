@@ -88,13 +88,11 @@ public class AssetLoader {
 
     }
 
-    // Ролучает на вход значение для highScore и сохраняет в файл
     public static void setHighScore(int val) {
         prefs.putInteger("highScore", val);
         prefs.flush();
     }
 
-    // Возвращает текущее значение highScore
     public static int getHighScore() {
         return prefs.getInteger("highScore");
     }

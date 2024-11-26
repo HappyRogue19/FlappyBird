@@ -20,7 +20,7 @@ public class GameWorld {
     private int gameWidth;
     private GameState currentState;
     public enum GameState {
-        READY, RUNNING, GAME_OVER
+        READY, RUNNING, GAME_OVER, HIGHSCORE
     }
 
     public GameWorld(int midPointY, int gameHeight, int gameWidth) {
@@ -65,6 +65,9 @@ public class GameWorld {
             bird.die();
             bird.decelerate();
             currentState = GameState.GAME_OVER;
+            if (score > AssetLoader.getHighScore()) {
+                AssetLoader.setHighScore(score);
+            }
         }
         if (Intersector.overlaps(bird.getBoundingCircle(), ground)) {
             scroller.stop();
@@ -73,7 +76,12 @@ public class GameWorld {
             bird.die();
             bird.decelerate();
             currentState = GameState.GAME_OVER;
+            if (score > AssetLoader.getHighScore()) {
+                AssetLoader.setHighScore(score);
+                currentState = GameState.HIGHSCORE;
+            }
         }
+
     }
     public void restart() {
         currentState = GameState.READY;
@@ -103,5 +111,8 @@ public class GameWorld {
     }
     public void addScore(int increment) {
         score += increment;
+    }
+    public boolean isHighScore() {
+        return currentState == GameState.HIGHSCORE;
     }
 }
